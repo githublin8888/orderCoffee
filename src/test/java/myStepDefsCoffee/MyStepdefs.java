@@ -14,38 +14,43 @@ public class MyStepdefs {
 
     ServeCoffee serve;
 
-    @Given("A ([^\"]*) is {int} kr")
-    public void aCoffeeTypeIsPriceKr(String coffee, int coffeePrice) {
+    @Given("A {string} is {int} kr")
+    public void aIsKr(String type, int coffeePrice) {
         serve = new ServeCoffee();
-        serve.getSort(coffee);
-        serve.getPrice(coffeePrice);
+        serve.coffeeType(type);
+        serve.insertPrice(coffeePrice);
     }
+
 
     @And("I have deposited {int} kr")
-    public void iHaveDepositedMoney(int money) {
-        serve.putMoney(money);
+    public void iHaveDepositedMoneyKr(int money) {
+        serve.depositMoney(money);
     }
 
-    @When("I select {int} ([^\"]*)")
-    public void iSelectCupCoffeeType(int cup, String coffee) {
-        serve.getCup(cup);
-        serve.getSort(coffee);
+    @When("I select {int} {string}")
+    public void iSelectCupCup(int cup,String type) {
+        serve.selectCup(cup);
+        serve.coffeeType(type);
     }
 
-    @When("I press the Yes")
+    @And("I press the coffee {string}")
     public void iPressYes(String button) {
         serve.pressButton(button);
     }
 
-    @When("I press the No")
-    public void iPressNo(String button) {
-        serve.pressButton(button);
+
+    @Then("My order is {string}")
+    public void myOrderIsFailed(String expected) {
+        String actual=serve.getOrder();
+        assertEquals(expected,actual);
     }
 
-    @Then("My order is ([^\"]*)")
-    public void myOrderIsOrder(String expected) {
-        String actual = serve.myOrder();
-        assertEquals(expected, actual);
+
+    @And("I get my {string}")
+    public void iGetMy(String expected) {
+        String actual=serve.myReceipt();
+        assertEquals(expected,actual);
+
     }
 
 

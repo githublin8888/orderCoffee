@@ -1,46 +1,47 @@
 package serveCoffee;
 
 public class ServeCoffee {
-    String type;
     int price;
     int money;
     int cup;
-    boolean isPress;
+    String type;
     String button;
     String order;
+    String receipt;
 
-    public void getSort(String type) {
+    public void coffeeType(String type) {
         this.type=type;
     }
-
-    public void getPrice(int price) {
-        this.price=price;
+    public void insertPrice(int price) {
+        this.price = price;
     }
 
-    public void putMoney(int money) {
-        this.money=money;
+    public void depositMoney(int money) {
+        this.money = money;
     }
 
-    public void getCup(int cup) {
-        this.cup=cup;
+    public void selectCup(int cup) {
+        this.cup = cup;
     }
 
     public void pressButton(String button) {
-        this.button=button;
+        this.button = button;
     }
 
-    public String myOrder() {
-        if(cup>0 && money>price*cup && type!=null && button=="Yes"){
-            order="Succeeded";
-        }else order="Failed";
+    public String getOrder() {
+        if (money >= price * cup&& button.equals("Yes")) {
+            order = "Succeeded";
+        } else order = "Failed";
         return order;
     }
-}
-/*
-if(button.equals("Yes")){
-            isPress=true;
-        } else if (button.equals("No")) {
-            isPress=false;
 
-        }
- */
+
+    public String myReceipt() {
+        if(order=="Succeeded"){
+            receipt=cup+" "+type;
+        }else receipt="not order";
+        System.out.println(receipt);
+        return receipt;
+
+    }
+}
